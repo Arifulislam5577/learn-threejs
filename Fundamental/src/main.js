@@ -49,30 +49,16 @@ scene.add(group);
 
 const cube1 = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0x65a30d })
+  new THREE.MeshBasicMaterial({ color: 0xd97706 })
 );
 
-cube1.position.x = -2;
+cube1.position.x = 0;
 
 group.add(cube1);
 
-const cube2 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0x0d9488 })
-);
-cube2.position.x = 2;
-group.add(cube2);
-
-const cube3 = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0x1d4ed8 })
-);
-
-group.add(cube3);
-
 // // AXES HELPER
-const axesHelper = new THREE.AxesHelper();
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper();
+// scene.add(axesHelper);
 /**
  * Renderer
  */
@@ -80,4 +66,13 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.render(scene, camera);
+
+const tick = () => {
+  renderer.render(scene, camera);
+  group.rotation.x += 0.01;
+  group.rotation.y += 0.05;
+
+  window.requestAnimationFrame(tick);
+};
+
+tick();
